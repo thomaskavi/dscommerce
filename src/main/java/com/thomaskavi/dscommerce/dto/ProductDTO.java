@@ -7,9 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 
 public class ProductDTO {
@@ -31,4 +31,5 @@ public class ProductDTO {
     price = entity.getPrice();
     imgUrl = entity.getImgUrl();
   }
+
 }
