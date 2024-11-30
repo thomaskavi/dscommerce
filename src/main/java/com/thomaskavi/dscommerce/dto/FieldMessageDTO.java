@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class FieldMessage {
+public class FieldMessageDTO {
 
   private String fieldName;
   private String message;
