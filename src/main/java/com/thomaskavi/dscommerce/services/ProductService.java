@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thomaskavi.dscommerce.dto.CategoryDTO;
 import com.thomaskavi.dscommerce.dto.ProductDTO;
 import com.thomaskavi.dscommerce.dto.ProductMinDTO;
+import com.thomaskavi.dscommerce.entities.Category;
 import com.thomaskavi.dscommerce.entities.Product;
 import com.thomaskavi.dscommerce.repositories.ProductRepository;
 import com.thomaskavi.dscommerce.services.exceptions.DatabaseException;
@@ -71,10 +73,18 @@ public class ProductService {
   }
 
   private void copyDtoToEntity(ProductDTO dto, Product entity) {
-    entity.setName(dto.getDescription());
+    entity.setName(dto.getName());
     entity.setDescription(dto.getDescription());
     entity.setPrice(dto.getPrice());
     entity.setImgUrl(dto.getImgUrl());
+
+    // Atualizar as categorias sem substituir a coleção diretamente
+    entity.getCategories().clear(); // Limpa as categorias existentes
+    for (CategoryDTO catDto : dto.getCategories()) {
+      Category cat = new Category();
+      cat.setId(catDto.getId());
+      entity.getCategories().add(cat); // Adiciona as novas categorias
+    }
   }
 
 }

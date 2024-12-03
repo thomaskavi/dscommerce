@@ -14,13 +14,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 
 @Entity
 @Table(name = "tb_product")
@@ -28,6 +26,7 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @EqualsAndHashCode.Include
   private Long id;
 
   private String name;
@@ -45,6 +44,14 @@ public class Product {
 
   @OneToMany(mappedBy = "id.product")
   private Set<OrderItem> items = new HashSet<>();
+
+  public Product(Long id, String name, String description, Double price, String imgUrl) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.imgUrl = imgUrl;
+  }
 
   public Long getId() {
     return id;
@@ -90,6 +97,10 @@ public class Product {
     return categories;
   }
 
+  public void setCategories(Set<Category> categories) {
+    this.categories = categories;
+  }
+
   public Set<OrderItem> getItems() {
     return items;
   }
@@ -97,4 +108,5 @@ public class Product {
   public List<Order> getOrders() {
     return items.stream().map(x -> x.getOrder()).toList();
   }
+
 }
