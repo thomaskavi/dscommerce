@@ -27,7 +27,7 @@ Este projeto foi criado como parte do curso Java Spring Essential(DevSuperior), 
 
 ## Tecnologias e Ferramentas
 
-##### Linguagem: Java JDK 
+##### Linguagem: Java
 ##### Framework: Spring Boot
 ##### Banco de Dados: H2
 ##### Segurança: Spring Security com autenticação OAuth2 e JWT
