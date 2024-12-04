@@ -8,6 +8,7 @@ import com.thomaskavi.dscommerce.entities.Product;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
@@ -21,14 +22,15 @@ public class ProductDTO {
   private Long id;
 
   @Size(min = 3, max = 80, message = "O nome deve ter entre 3 e 80 carácteres")
-  @NotBlank(message = "Nome é obrigatório")
+  @NotBlank(message = "Campo requirido")
   private String name;
 
   @Size(min = 10, message = "Descrição deve conter no mínimo 10 carácteres")
-  @NotBlank
+  @NotBlank(message = "Campo requirido")
   private String description;
 
-  @Positive(message = "O preço deve ser um número positivo")
+  @NotNull(message = "Campo requirido")
+  @Positive(message = "O preço deve ser positivo")
   private Double price;
 
   private String imgUrl;
