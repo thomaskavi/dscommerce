@@ -19,8 +19,6 @@ import com.thomaskavi.dscommerce.repositories.ProductRepository;
 import com.thomaskavi.dscommerce.services.exceptions.DatabaseException;
 import com.thomaskavi.dscommerce.services.exceptions.ResourceNotFoundException;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @Service
 public class ProductService {
 
@@ -30,13 +28,13 @@ public class ProductService {
   @Transactional(readOnly = true)
   public ProductDTO findById(Long id) {
     Product product = repository.findById(id)
-        .orElseThrow(() -> new DatabaseException("Resource not found"));
+        .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
     return new ProductDTO(product);
   }
 
   @Transactional(readOnly = true)
-  public Page<ProductMinDTO> findAll(Pageable pageable) {
-    Page<Product> result = repository.findAll(pageable);
+  public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
+    Page<Product> result = repository.searchByName(name, pageable);
     return result.map(x -> new ProductMinDTO(x));
   }
 
@@ -55,20 +53,20 @@ public class ProductService {
       copyDtoToEntity(dto, entity);
       entity = repository.save(entity);
       return new ProductDTO(entity);
-    } catch (EntityNotFoundException e) {
-      throw new DatabaseException("Resource not found");
+    } catch (ResourceNotFoundException e) {
+      throw new ResourceNotFoundException("Recurso não encontrado");
     }
   }
 
   @Transactional(propagation = Propagation.SUPPORTS)
   public void delete(Long id) {
     if (!repository.existsById(id)) {
-      throw new ResourceNotFoundException("Resource not found");
+      throw new ResourceNotFoundException("Recurso não encontrado");
     }
     try {
       repository.deleteById(id);
     } catch (DataIntegrityViolationException e) {
-      throw new DatabaseException("Referential integrity failure");
+      throw new DatabaseException("Falha de integridade referencial");
     }
   }
 
