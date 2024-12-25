@@ -13,10 +13,17 @@ public class AuthService {
   private UserService userService;
 
   public void validateSelfOrAdmin(long userId) {
-    User me = userService.athenticated();
+    User me = userService.authenticated();
 
-    if (!me.hasRole("ROLE_ADMIN") && !me.getId().equals(userId)) {
-      throw new ForbiddenException("Acceso negado");
+    // if (!me.hasRole("ROLE_ADMIN") && !me.getId().equals(userId)) {
+    // throw new ForbiddenException("Acceso negado");
+    // }
+
+    if (me.hasRole("ROLE_ADMIN")) {
+      return;
+    }
+    if (!me.getId().equals(userId)) {
+      throw new ForbiddenException("Acesso negado, o usuário só pode acessar seus próprios pedidos");
     }
   }
 }

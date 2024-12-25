@@ -51,7 +51,7 @@ public class OrderService {
     order.setMoment(Instant.now());
     order.setStatus(OrderStatus.WAITING_PAYMENT);
 
-    User user = userService.athenticated();
+    User user = userService.authenticated();
     order.setClient(user);
 
     for (OrderItemDTO itemDto : dto.getItems()) {
