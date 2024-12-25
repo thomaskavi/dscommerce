@@ -78,7 +78,7 @@ public class UserServiceTests {
 
     Mockito.when(userUtil.getLoggedUsername()).thenReturn(existingUsername);
 
-    User result = service.athenticated();
+    User result = service.authenticated();
 
     Assertions.assertNotNull(result);
     Assertions.assertEquals(result.getUsername(), existingUsername);
@@ -90,7 +90,7 @@ public class UserServiceTests {
     Mockito.doThrow(ClassCastException.class).when(userUtil).getLoggedUsername();
 
     Assertions.assertThrows(UsernameNotFoundException.class, () -> {
-      service.athenticated();
+      service.authenticated();
     });
   }
 
@@ -98,8 +98,8 @@ public class UserServiceTests {
   public void getMeShouldReturnUserDTOWhenUserAuthenticated() {
 
     UserService spyUserService = Mockito.spy(service);
-    Mockito.doReturn(user).when(spyUserService).athenticated();
-    // Mockito.doReturn(user).when(service.athenticated());
+    Mockito.doReturn(user).when(spyUserService).authenticated();
+    // Mockito.doReturn(user).when(service.authenticated());
 
     UserDTO result = spyUserService.getMe();
 
@@ -111,7 +111,7 @@ public class UserServiceTests {
   public void getMeShouldThrowUsernameNotFoundExceptionWhenUserNotAuthenticated() {
 
     UserService spyUserService = Mockito.spy(service);
-    Mockito.doThrow(UsernameNotFoundException.class).when(spyUserService).athenticated();
+    Mockito.doThrow(UsernameNotFoundException.class).when(spyUserService).authenticated();
 
     Assertions.assertThrows(UsernameNotFoundException.class, () -> {
       @SuppressWarnings("unused")
