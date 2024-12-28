@@ -16,7 +16,7 @@ import com.thomaskavi.dscommerce.entities.User;
 import com.thomaskavi.dscommerce.repositories.OrderItemRepository;
 import com.thomaskavi.dscommerce.repositories.OrderRepository;
 import com.thomaskavi.dscommerce.repositories.ProductRepository;
-import com.thomaskavi.dscommerce.services.exceptions.DatabaseException;
+import com.thomaskavi.dscommerce.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class OrderService {
@@ -39,7 +39,7 @@ public class OrderService {
   @Transactional(readOnly = true)
   public OrderDTO findById(Long id) {
     Order order = repository.findById(id)
-        .orElseThrow(() -> new DatabaseException("Recurso não encontrado"));
+        .orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
     authService.validateSelfOrAdmin(order.getClient().getId());
     return new OrderDTO(order);
   }

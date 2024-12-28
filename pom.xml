@@ -106,8 +106,10 @@
 						<exclude>com/thomaskavi/dscommerce/config/**</exclude>
 						<exclude>com/thomaskavi/dscommerce/entities/**</exclude>
 						<exclude>com/thomaskavi/dscommerce/dto/**</exclude>
-						<exclude>com/thomaskavi/dscommerce/controllers/handlers/**</exclude>
+						<exclude>com/thomaskavi/dscommerce/controllers/**</exclude>
 						<exclude>com/thomaskavi/dscommerce/services/exceptions/**</exclude>
+						<exclude>com/thomaskavi/dscommerce/util/**</exclude>
+
 					</excludes>
 				</configuration>
 				<executions>

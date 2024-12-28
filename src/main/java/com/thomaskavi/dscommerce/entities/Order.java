@@ -16,12 +16,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
 
 @Entity
@@ -46,6 +42,17 @@ public class Order {
 
   @OneToMany(mappedBy = "id.order")
   private Set<OrderItem> items = new HashSet<>();
+
+  public Order() {
+  }
+
+  public Order(Long id, Instant moment, OrderStatus status, User client, Payment payment) {
+    this.id = id;
+    this.moment = moment;
+    this.status = status;
+    this.client = client;
+    this.payment = payment;
+  }
 
   public Long getId() {
     return id;
