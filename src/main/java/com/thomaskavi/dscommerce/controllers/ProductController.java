@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -37,9 +38,11 @@ public class ProductController {
   }
 
   @GetMapping
-  public ResponseEntity<Page<ProductMinDTO>> findAll(String name, Pageable pageable) {
-    Page<ProductMinDTO> dto = service.findAll(name, pageable);
-    return ResponseEntity.ok(dto);
+  public ResponseEntity<Page<ProductMinDTO>> findAll(
+          @RequestParam(name = "name", defaultValue = "") String name,
+          Pageable pageable) {
+      Page<ProductMinDTO> dto = service.findAll(name, pageable);
+      return ResponseEntity.ok(dto);
   }
 
   @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
