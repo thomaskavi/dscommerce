@@ -27,6 +27,8 @@ import com.thomaskavi.dscommerce.services.exceptions.DatabaseException;
 import com.thomaskavi.dscommerce.services.exceptions.ResourceNotFoundException;
 import com.thomaskavi.dscommerce.tests.ProductFactory;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @ExtendWith(SpringExtension.class)
 public class ProductServiceTests {
 
@@ -62,7 +64,7 @@ public class ProductServiceTests {
     Mockito.when(repository.save(any())).thenReturn(product);
 
     Mockito.when(repository.getReferenceById(existingId)).thenReturn(product);
-    Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(ResourceNotFoundException.class);
+    Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
 
     Mockito.when(repository.existsById(existingId)).thenReturn(true);
     Mockito.when(repository.existsById(dependentId)).thenReturn(true);

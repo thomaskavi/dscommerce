@@ -1,4 +1,4 @@
-package com.thomaskavi.dscommerce.controllers;
+package com.thomaskavi.dscommerce.controllers.it;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
