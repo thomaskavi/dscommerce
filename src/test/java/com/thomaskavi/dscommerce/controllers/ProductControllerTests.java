@@ -1,4 +1,4 @@
-package com.thomaskavi.dscommerce.controllers.it;
+package com.thomaskavi.dscommerce.controllers;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,7 +28,7 @@ import com.thomaskavi.dscommerce.tests.TokenUtil;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class ProductControllerIT {
+public class ProductControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
