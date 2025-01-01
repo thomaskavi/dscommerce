@@ -19,6 +19,8 @@ import com.thomaskavi.dscommerce.repositories.ProductRepository;
 import com.thomaskavi.dscommerce.services.exceptions.DatabaseException;
 import com.thomaskavi.dscommerce.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ProductService {
 
@@ -53,7 +55,7 @@ public class ProductService {
       copyDtoToEntity(dto, entity);
       entity = repository.save(entity);
       return new ProductDTO(entity);
-    } catch (ResourceNotFoundException e) {
+    } catch (EntityNotFoundException e) {
       throw new ResourceNotFoundException("Recurso não encontrado");
     }
   }
